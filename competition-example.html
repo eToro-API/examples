@@ -2,22 +2,15 @@
 
 <head>
 
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
     <style>
-        .body {
-            font-family: 'Oswald', sans-serif;
-            background-color: rgb(80, 80, 80);
-            color: antiquewhite;
-        }
-        
         .user-img {
             float: left;
             width: 40px;
@@ -31,7 +24,7 @@
         }
         
         body {
-            font-family: 'Oswald', sans-serif;
+            font-family: sans-serif;
             background-color: rgb(80, 80, 80);
             color: antiquewhite;
         }
@@ -64,15 +57,11 @@
     <script>
         //
         // As we'll be accessing two API products (Competitions and Professional) 
-        // we need to define two API keys
+        // we need to define two API keys, and define the competition ID
         //
         var COMPETITION_API_KEY = YOUR_COMPETITIONS_API_KEY;
         var PROFESSIONAL_API_KEY = YOUR_PROFESSIONAL_API_KEY;
-
-        //
-        // The running Competition
-        //
-        var COMPETITION_ID = 10;
+        var COMPETITION_ID = YOUR_COMPETITION_ID;
 
         $(document).ready(function() {
             init(COMPETITION_ID);
