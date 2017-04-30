@@ -1,0 +1,387 @@
+<html>
+
+<head>
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <style>
+        .body {
+            font-family: 'Oswald', sans-serif;
+            background-color: rgb(80, 80, 80);
+            color: antiquewhite;
+        }
+        
+        .user-img {
+            float: left;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .user-name {
+            float: left;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: rgb(80, 80, 80);
+            color: antiquewhite;
+        }
+        
+        .jsgrid-cell {
+            background-color: rgb(80, 80, 80) !important;
+            color: antiquewhite;
+        }
+        
+        .jsgrid-header-cell {
+            color: black;
+            font-weight: 100;
+        }
+        
+        .jsgrid-pager a {
+            color: antiquewhite !important;
+        }
+        
+        .gain {
+            float: left;
+            margin-left: 3em;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="ResultTbl"></div>
+
+    <script>
+        //
+        // As we'll be accessing two API products (Competitions and Professional) 
+        // we need to define two API keys
+        //
+        var COMPETITION_API_KEY = YOUR_COMPETITIONS_API_KEY;
+        var PROFESSIONAL_API_KEY = YOUR_PROFESSIONAL_API_KEY;
+
+        //
+        // The running Competition
+        //
+        var COMPETITION_ID = 10;
+
+        $(document).ready(function() {
+            init(COMPETITION_ID);
+        });
+
+
+        function init(competitionId) {
+
+            //
+            // Field descriptor for the table widget
+            //
+            var fields = [{
+                name: 'rank',
+                title: 'Rank',
+                type: 'text',
+                align: 'right',
+                width: 30
+            }, {
+                name: 'username',
+                title: 'Username',
+                type: 'text',
+                align: 'left',
+                width: 200,
+                itemTemplate: function(val) {
+
+                    //
+                    // Customize the display in order to show the user
+                    // avatar and provide an option to open the user profile
+                    // on clicking
+                    //
+                    var name = document.createElement('div');
+                    name.textContent = val;
+                    $(name).addClass('user-name');
+                    $(name).data('username', val);
+                    $(name).click(function() {
+                        var url = 'https://www.etoro.com/people/' + $(this).data('username') + '/stats';
+                        window.open(url, '_blank');
+                    });
+
+                    //
+                    // Create a placeholder element for the image, we will
+                    // set its source in a deferred manner
+                    //
+                    var avatar = document.createElement('img');
+                    avatar.id = val;
+                    $(avatar).addClass('user-img');
+
+                    var parent = document.createElement('div');
+                    parent.append(avatar);
+                    parent.append(name);
+
+                    return parent;
+                }
+            }, {
+                name: 'gain',
+                title: 'Gain %',
+                type: 'text',
+                align: 'right',
+                width: 80,
+                itemTemplate: function(val, row) {
+                    var valItem = document.createElement('div');
+                    valItem.textContent = val;
+                    $(valItem).addClass('gain');
+
+                    var prev = row.prevGain;
+
+                    var color = null;
+                    var dir = document.createElement('i');
+                    $(dir).addClass('material-icons');
+                    if (prev > val) {
+                        dir.textContent = 'trending_down';
+                        color = 'red';
+                    } else if (prev < val) {
+                        dir.textContent = 'trending_up';
+                        color = 'green';
+                    } else
+                        dir.textContent = 'trending_flat';
+
+                    if (color != null)
+                        $(dir).css('color', color);
+
+                    var parent = document.createElement('div');
+                    parent.append(valItem);
+                    parent.append(dir);
+
+                    return parent;
+                }
+            }, {
+                type: 'text',
+                title: 'History',
+                width: 150,
+                itemTemplate: function(val, row) {
+
+                    //
+                    // Create a placeholder for the mini-chart
+                    //
+                    var element = document.createElement('div');
+                    element.id = row.username + '_chart';
+
+                    return element;
+                }
+            }];
+
+            $('#ResultTbl').jsGrid({
+                height: $(document).height() * 0.92,
+                width: $(document).width() * 0.45,
+                autoload: true,
+                editing: false,
+                inserting: false,
+                filtering: false,
+                paging: true,
+                pageSize: 11,
+                pageLoading: true,
+                sorting: false,
+                fields: fields,
+                loadMessage: 'Loading ...',
+                controller: {
+                    loadData: function(filter) {
+                        return loadResults(filter);
+                    }
+                }
+            });
+        }
+
+        //
+        // Load result set by filter
+        //
+        function loadResults(filter) {
+
+            var d = $.Deferred();
+
+            //
+            // Set the correct parameters according to the competition
+            // and the requested paging
+            //
+            var params = [];
+            params.push('CompetitionId=' + COMPETITION_ID);
+            if (filter.pageIndex !== undefined)
+                params.push('Page=' + filter.pageIndex);
+            if (filter.pageSize !== undefined)
+                params.push('PageSize=' + filter.pageSize)
+
+            $.ajax({
+                url: 'https://api.etoro.com/competitions/v1/Results?' + params.join('&'),
+                beforeSend: function(xhrObj) {
+                    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", COMPETITION_API_KEY);
+                },
+                success: function(data) {
+                    var usernames = $.map(data.items, function(val) {
+                        return val.username;
+                    });
+
+                    loadUserInfo(usernames);
+                    loadSparkChart(usernames);
+
+                    var ret = {
+                        data: data.items,
+                        itemsCount: data.totalItems
+                    }
+                    d.resolve(ret);
+                },
+                error: function() {
+                    d.reject();
+                }
+            });
+
+            return d;
+        }
+
+        //
+        // Get the user info in order to find user avatars
+        //
+        function loadUserInfo(usernames) {
+
+            $.ajax({
+                url: 'https://api.etoro.com/API/User/V1/Multiple/Info?Usernames=' + usernames,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Ocp-Apim-Subscription-Key', PROFESSIONAL_API_KEY);
+                },
+                type: 'GET',
+                success: function(data) {
+
+                    //
+                    // Attempt to find 35x35 images to fit the table
+                    //
+                    $.each(data, function() {
+                        img = '';
+                        var itm = this.media.find(function(itm) {
+                            return itm.width === 35;
+                        });
+                        if (itm !== undefined)
+                            img = itm.uri;
+
+                        //
+                        // find the image placeholder
+                        //
+                        var ctrl = $('#' + this.userName);
+                        if (ctrl != null) {
+                            $(ctrl).attr('src', img);
+                        }
+                    });
+                }
+            });
+        }
+
+        //
+        // Get sparkcharts for users
+        //
+        function loadSparkChart(usernames) {
+
+            $.each(usernames, function() {
+                $.ajax({
+                    url: 'https://api.etoro.com/competitions/v1/UserResults?Competitionid=' + COMPETITION_ID + '&username=' + this,
+                    username: this,
+                    beforeSend: function(xhrObj) {
+                        xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", COMPETITION_API_KEY);
+                    },
+                    success: function(data) {
+                        drawSparkChart(this.username, data);
+                    }
+                });
+            });
+        }
+
+        function drawSparkChart(username, data) {
+
+            //
+            // Attempt to find placeholder for the chart
+            //
+            var ctrl = $('#' + username + '_chart');
+            if (ctrl == null)
+                return;
+
+            //
+            // Create the data series for HighCharts
+            //
+            var series = $.map(data, function(val) {
+                return {
+                    x: new Date(val.timestamp).getTime(),
+                    y: val.gain
+                };
+            });
+
+
+            $(ctrl).highcharts('chart', {
+                chart: {
+                    type: 'spline',
+                    backgroundColor: null,
+                    height: 60,
+                    renderTo: ctrl
+                },
+                title: {
+                    text: null
+                },
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                xAxis: {
+                    labels: {
+                        enabled: false
+                    },
+                    title: {
+                        text: null
+                    },
+                    startOnTick: false,
+                    endOnTick: false,
+                    tickPositions: []
+                },
+                yAxis: {
+                    labels: {
+                        enabled: false
+                    },
+                    title: {
+                        text: null
+                    },
+                    startOnTick: false,
+                    endOnTick: false,
+                    tickPositions: []
+                },
+                credits: {
+                    enabled: false
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    useHTML: true,
+                    formatter: function() {
+                        var timestamp = new Date(this.x);
+                        var formatted = timestamp.toLocaleDateString('en-US', {
+                            month: 'long',
+                            day: 'numeric',
+                            hour: 'numeric'
+                        });
+
+                        return '<b>' + formatted + '</b> ' + this.y.toFixed(2) + '%'
+                    }
+                },
+                series: [{
+                    data: series,
+                    zIndex: 10000
+                }],
+            });
+        }
+    </script>
+</body>
+
+</html>
