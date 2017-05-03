@@ -1,0 +1,314 @@
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: monospace;
+            margin: 2em;
+        }
+        
+        p {
+            font-size: large;
+        }
+        
+        .bigger {
+            font-size: x-large;
+        }
+        
+        table {
+            width: 60%;
+            font-size: large;
+        }
+        
+        table tbody tr td {
+            margin: 20px;
+        }
+        
+        td:nth-child(3) {
+            text-align: center;
+        }
+        
+        td:nth-child(4) {
+            text-align: center;
+        }
+        
+        thead {
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .copy {
+            background-color: lightgray;
+        }
+        
+        .engagement {
+            background-color: darkgray;
+        }
+        
+        .demographics {
+            background-color: lightgray;
+        }
+        
+        .trading {
+            background-color: darkgray;
+        }
+        
+        .explanation {
+            font-size: large;
+        }
+        
+        .code {
+            font-family: Courier New, Courier, monospace;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="bigger">The following table describes the members of the discovery API</p>
+    <table>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Data-Type</td>
+                <td>Query Operations</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="demographics">
+                <td>username</td>
+                <td>The username of the customer</td>
+                <td>string</td>
+                <td>n/a</td>
+            </tr>
+            <tr class="demographics">
+                <td>weeksSinceRegistration</td>
+                <td>The number of weeks since the customer had registered to eToro</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="demographics">
+                <td>countryId</td>
+                <td>The country that the customer is registered. For a full list of country IDs refer to the <a href="https://api-portal.etoro.com/docs/services/5784e8446361c811ccfdf536/operations/5784e9186361c811ccfdf537">Metadata/Countries API</a> call</td>
+                <td>integer</td>
+                <td>in</td>
+            </tr>
+            <tr class="demographics">
+                <td>affiliateId</td>
+                <td>The affiliate ID which is associated with the customer</td>
+                <td>integer</td>
+                <td>in</td>
+            </tr>
+            <tr class="demographics">
+                <td>isPopularInvestor</td>
+                <td>Is the customer a popular investor in the eToro system</td>
+                <td>boolean</td>
+                <td>equality</td>
+            </tr>
+
+            <tr class="demographics">
+                <td>isFund</td>
+                <td>Does this account represent a fund</td>
+                <td>boolean</td>
+                <td>equality</td>
+            </tr>
+            <tr class="trading">
+                <td>dailyGain</td>
+                <td>The user's gain in the last trading day</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>thisWeekGain</td>
+                <td>The user's gain from the beginning of the trading week (Sunday)</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>riskScore</td>
+                <td>The current risk score of the user. The values may be between 0-10.</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>maxDailyRiskScore</td>
+                <td>The maximum daily risk score for a user during this interval</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>maxMonthlyRiskScore</td>
+                <td>The maximum average monthly risk score for a user during this interval</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>trades</td>
+                <td>The total number of trades during this interval</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>topTradedInstrumentId</td>
+                <td>The top traded instrument id during this interval. This value is calculated based on manual trading only. For the full list of instrumens refer to the <a href="https://api-portal.etoro.com/docs/services/5784e8446361c811ccfdf536/operations/5784f6ee6361c811ccfdf53b">Metadata/Instruments</a>                    API</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>topTradedAssetId</td>
+                <td>The top traded asset class id during this interval. This value is calculated based on manual trading only. For the full list of asset classes refer to the <a href="https://api-portal.etoro.com/docs/services/5784e8446361c811ccfdf536/operations/5784f5076361c811ccfdf53a">Metadata/Instruments</a>                    API</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>winRatio</td>
+                <td>The winning ratio during the interval. This is the ratio between profitable trades and the total number of trades. It is important to note that a copy trade is treated as a single trade, and the values include open trades</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>dailyDD</td>
+                <td>Maximum daily Draw-down during this interval</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>weeklyDD</td>
+                <td>Maximum weekly Draw-down during this interval</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>peakToValley</td>
+                <td>Maximum peak to vally draw-down during this interval</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>profitableWeeksPct</td>
+                <td>The percentage of trading weeks (Sunday to Sunday) which were profitable during this interval</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>profitableMonthsPct</td>
+                <td>The percentage of months which were profitable during this interval</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>avgPosSize</td>
+                <td>The average trade size percentage relative to the realized equity at the time of opening the trade.</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>highLeveragePct</td>
+                <td>The percetnage of trades which used high leverage.</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>mediumLeveragePct</td>
+                <td>The percetnage of trades which used medium leverage.</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>lowLeveragePct</td>
+                <td>The percetnage of trades which used low leverage.</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>copiedTrades</td>
+                <td>The total number of copied trades during this interval</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>copyTradesPct</td>
+                <td>The percentage of copy-trades of all trades executed during this interval</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="trading">
+                <td>copyInvestmentPct</td>
+                <td>The investment percenage of copy-trades during this interval. The value is calculated by the total invested amount in copy trades divided by the total invested amount in the interval</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="copy">
+                <td>copiers</td>
+                <td>The number of copiers of this user</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="copy">
+                <td>baseLineCopiers</td>
+                <td>The number of copiers of this user one week ago</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="copy">
+                <td>copiersGain</td>
+                <td>The gain in copiers in the last week</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="copy">
+                <td>aumTier</td>
+                <td>The tier of the assets under management of this user. This figure is relevant for customers with copiers. The current scale is as following: 1 - up to $50K, 2- between $50-100K, 3 - between $100-500K, 4 - over $500K</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="copy">
+                <td>VirtualCopiers</td>
+                <td>The number of copiers using virtual money to copy the user</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="engagement">
+                <td>firstActivity</td>
+                <td>number of days between the beginning of the interval and the first trading activity of the user</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="engagement">
+                <td>lastActivity</td>
+                <td>number of days between the last trading activity and the end of the interval</td>
+                <td>integer</td>
+                <td>min/max</td>
+            </tr>
+            <tr class="engagement">
+                <td>activeWeeksPct</td>
+                <td>The percentage of weeks within the interval which the customer had active trades</td>
+                <td>number</td>
+                <td>min/max</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        A query can be constructed using any one of the members which allows a query operation. Each part of the query is an independant query parameter.
+    </p>
+    <p>
+        <b>Min/Max</b>
+        <p>In order to define a minimum value you'll need to suffix the Min to the member name and specify a value. The same applies for a mximum value with a Max suffix</p>
+        <p>To find customers with at least 10 copiers you need to add a query parameter in the following form <span class="code">CopiersMin=10</span>.</p>
+        <p>If we would like to find customers with a gain between 10-30% we will add these query parameters: <span class="code">GainMin=10&amp;GainMax=30</span></p>
+    </p>
+    <p>
+        <b>IN</b>
+        <p>In order to define values for the IN operator, they should be comma delimited</p>
+        <p>If we want to find customers from Germany (country ID 79) and Austria (country ID 13), we will add a query parameter in the following form <span class="code">CountryId=13,79</span></p>
+    </p>
+
+    <p>
+        <b>Equality</b>
+        <p>The equality type is used for boolean values. In order to use it you need to set a query parameter with a boolean value</p>
+        <p>If we want to filter for users who are popular investors we will add a query parameter in the following form <span class="code">IsPopularInvestor=true</span></p>
+    </p>
+</body>
+
+</html>
