@@ -1,0 +1,383 @@
+<html>
+<header>
+
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inconsolata';
+        }
+        
+        .period {
+            width: 10%;
+        }
+        
+        .ui-widget {
+            font-family: 'Inconsolata' !important;
+            font-size: 0.8em;
+        }
+        
+        #top {
+            height: 3em;
+            margin: 2em;
+        }
+        
+        #top div {
+            margin-right: 2em;
+            float: left;
+        }
+        
+        .sorter {
+            width: 13%;
+        }
+        
+        #SortDir {
+            width: 8%;
+        }
+        
+        .full {
+            width: 100%;
+        }
+        
+        .number {
+            text-align: right;
+            display: block;
+        }
+    </style>
+
+</header>
+
+<body>
+
+    <div id="top">
+        <div id="PeriodDiv" class="period"></div>
+        <div id="SortDiv" class="sorter"></div>
+        <select id="SortDir" class="full">
+            <option value="d" selected="selected">Descending</option>
+            <option value="a">Ascending</option>
+        </select>
+        <div id="Selectors"></div>
+    </div>
+    <div id="Grid"></div>
+
+    <script>
+        //
+        // Base eToro API Url
+        //
+        var APIBaseUrl = 'https://api.etoro.com/';
+
+        //
+        // The API key
+        //
+        var APIkey = YOUR_API_KEY;
+
+        //
+        // refresh function
+        //
+        var search = function() {
+            $('#Grid').jsGrid('search');
+        };
+
+
+        /**
+         * @desc Invokes an API call to the eToro API
+         * 
+         * @param {string} url - The url to be invoked. The url may be absolute
+         * or relative
+         * @param {function} resolver - A function to resolve the response upon success.
+         * If omitted the response will contain two members: data - the response itself, 
+         * userData - the optional user data sent with the request
+         * @param {object} userData - user data that may be returned once the call complets
+         * successfully
+         * @return {object} - a Deffered object of JQUERY
+         * 
+         */
+        function APICall(url, resolver, userData) {
+
+            if (!url.toLowerCase().startsWith('http'))
+                url = APIBaseUrl + url;
+
+            var d = $.Deferred();
+
+            if (resolver == null)
+                resolver = function(data) {
+                    return {
+                        data: data,
+                        userData: this.userData
+                    };
+                }
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                headers: {
+                    'Ocp-Apim-Subscription-Key': APIkey,
+                    'Content-Type': 'application/json'
+                },
+                userData: userData,
+                success: function(data) {
+                    ret = resolver(data);
+                    d.resolve(ret);
+                },
+                error: function() {
+                    d.reject();
+                }
+            });
+
+            return d;
+        }
+
+        /**
+         * @desc get minimum and maximum values from a filter field.
+         * The separation between the minimum and maximum values is the '-' sign
+         * 
+         * @return {object} - in case of error a null value will be returned. Otherwise
+         * the object will contain two members: min/max with either a value or a null value
+         */
+        function getMinMax(val) {
+            var min = null;
+            var max = null;
+
+            var start = 0;
+            for (var i = 0; i < val.length; i++) {
+                var curr = val[i];
+                if (curr !== '-' && !$.isNumeric(curr))
+                    return null;
+
+                if (curr === '-' && i !== 0) {
+                    min = val.substr(0, i);
+                    start = i + 1;
+                }
+            }
+
+            if (start !== 0)
+                max = val.substr(start);
+            else
+                min = val;
+
+            return {
+                min: min,
+                max: max
+            }
+        }
+
+        /**
+         * @desc Get the filter parameters
+         * @retrun {array} of query parameters
+         */
+        function getFilterParams() {
+            var params = [];
+
+            var filter = $("#Grid").jsGrid("getFilter");
+            $.each(Object.keys(filter), function(i, key) {
+
+                var val = filter[key];
+                if (val != null && typeof val === 'string' && val !== '') {
+
+                    var meta = $("#Grid").jsGrid('fieldOption', key, 'raw')
+
+                    if (meta.operation === "MinMax") {
+                        var vals = getMinMax(val);
+                        if (vals != null) {
+                            if (vals.min !== null)
+                                params.push(key + "Min=" + vals.min);
+
+                            if (vals.max !== null) {
+                                params.push(key + 'Max=' + vals.max);
+                            }
+                        }
+                    } else if (meta.operation === "In") {
+                        params.push(key + '=' + val);
+                    }
+                }
+            });
+
+            return params;
+        }
+
+        /**
+         * @desc Get the query options (paging and ordering)
+         * 
+         * @return {array} of query parameters
+         */
+        function getQueryOpts() {
+            var params = [];
+
+            var page = $('#Grid').jsGrid('option', 'pageIndex');
+            params.push('Page=' + page);
+            var pageSize = $('#Grid').jsGrid('option', 'pageSize');
+            params.push('PageSize=' + pageSize);
+
+            var prefix = $('#SortDir').val() === 'd' ? '-' : '';
+            var col = $('#SortCol').val();
+            params.push('Sort=' + prefix + col);
+
+            return params;
+        }
+
+        /**
+         * @desc Refresh the grid
+         * 
+         * @return {object} - a Deffered object of JQUERY which will be triggered once we get a 
+         * response from the API
+         */
+        function refreshData() {
+            var url = '/Discover/V1/Search?Period=' + $('#Period').val() + '&';
+
+            var opts = getQueryOpts();
+            var filters = getFilterParams();
+
+            url += $.merge(opts, filters).join('&');
+
+            var resolver = function(data) {
+                return {
+                    data: data.items,
+                    itemsCount: data.totalItems
+                }
+            };
+            return APICall(url, resolver);
+        }
+
+        /**
+         * @desc Initial table set-up
+         * 
+         * @param {object} meta - Meta data on the available discovery fields
+         */
+        function tblSetup(meta) {
+
+            var fields = $.map(meta, function(val) {
+
+                var type = val.type === 'integer' ? 'number' : val.type;
+
+                //
+                // Set the value rendering:
+                // For the username set a reference to the profile in the platform
+                // For numerics: ignore null values and 0's, and for the rest, set
+                // a uniform precision
+                //
+                var renderer = null;
+                if (val.name === 'UserName') {
+                    renderer = function(value) {
+
+                        var ret = '<a href="https://www.etoro.com/people/' + value + '/stats" target="_blank">' + value + '</a>';
+                        return ret;
+
+                    };
+                } else if (type === 'number') {
+                    renderer = function(value) {
+                        if (value === undefined || value == 0)
+                            return '<td></td>';
+
+                        var precision = val.type === 'integer' ? 0 : 2;
+                        return '<td class="number">' + value.toFixed(precision) + '</td>';
+                    }
+                }
+
+
+                return {
+                    type: 'text',
+                    name: val.name[0].toLowerCase() + val.name.substr(1),
+                    align: type !== 'string' ? 'right' : 'left',
+                    title: val.displayName,
+                    filtering: type === 'string' ? false : true,
+                    itemTemplate: renderer,
+                    raw: val
+                }
+            });
+
+            $('#Grid').jsGrid({
+                height: '90%',
+                autoload: true,
+                editing: false,
+                filtering: true,
+                paging: true,
+                pageLoading: true,
+                pageSize: 20,
+                fields: fields,
+                controller: {
+                    loadData: function() {
+                        return refreshData();
+                    }
+                }
+            });
+
+        }
+
+        /**
+         * @desc Initialize the period selector, according to the metadata
+         */
+        function showPeriods(data) {
+
+            var defaultPeriod = 'SixMonthsAgo';
+            var optsVec = $.map(data, function(itm) {
+
+                var selected = '';
+                if (itm.period === defaultPeriod)
+                    selected = ' selected="selected"';
+
+                return '<option value="' + itm.period + '"' + selected + ">" + itm.period + '</option>';
+            });
+            var html = '<select id="Period" class="full">' + optsVec.join('') + '</select>';
+
+            $('#PeriodDiv').html(html);
+            $('#Period').select2({
+                minimumResultsForSearch: 15
+            });
+        }
+
+        /**
+         * @desc Initialize the sorting selectors according to the metadata
+         */
+        function showSorting(meta) {
+
+            var defaultSort = 'Gain';
+            var optsVec = $.map(meta, function(itm) {
+
+                var selected = '';
+                if (itm.name === defaultSort)
+                    selected = 'selected="selected"';
+
+                if (itm.type !== 'string')
+                    return '<option value="' + itm.name + '" ' + selected + '>' + itm.displayName + '</option>';
+            });
+
+            var html = '<select id="SortCol">' + optsVec.join('') + '</select>';
+            $('#SortDiv').html(html);
+            $('#SortCol').select2();
+            $('#SortDir').select2({
+                minimumResultsForSearch: 15
+            }).show();
+        }
+
+        $(document).ready(function() {
+
+            $('#SortDir').hide();
+
+            $.when(
+                    APICall('/Metadata/V1/StatsPeriods'),
+                    APICall('/Discover/V1/MetaData'))
+                .done(function(periods, meta) {
+
+                    showPeriods(periods.data);
+                    showSorting(meta.data);
+                    tblSetup(meta.data);
+
+                    $('#Top select').change(search);
+                    $('.jsgrid-filter-row :input[type=text]').change(search);
+
+                });
+        });
+    </script>
+</body>
+
+</html>
