@@ -20,16 +20,31 @@
             font-size: large;
         }
         
+        table tr {
+            height: 2.5em;
+        }
+        
         table tbody tr td {
             margin: 20px;
         }
         
+        td:nth-child(1) {
+            width: 20%;
+            padding-left: 0.5em;
+        }
+        
+        td:nth-child(2) {
+            padding: 0.5em;
+        }
+        
         td:nth-child(3) {
             text-align: center;
+            width: 12%;
         }
         
         td:nth-child(4) {
             text-align: center;
+            width: 12%;
         }
         
         thead {
@@ -60,6 +75,10 @@
         .code {
             font-family: Courier New, Courier, monospace;
             font-style: italic;
+        }
+        
+        .query-building {
+            width: 60%;
         }
     </style>
 </head>
@@ -289,26 +308,28 @@
             </tr>
         </tbody>
     </table>
-    <p>
-        A query can be constructed using any one of the members which allows a query operation. Each part of the query is an independant query parameter.
-    </p>
-    <p>
-        <b>Min/Max</b>
-        <p>In order to define a minimum value you'll need to suffix the Min to the member name and specify a value. The same applies for a mximum value with a Max suffix</p>
-        <p>To find customers with at least 10 copiers you need to add a query parameter in the following form <span class="code">CopiersMin=10</span>.</p>
-        <p>If we would like to find customers with a gain between 10-30% we will add these query parameters: <span class="code">GainMin=10&amp;GainMax=30</span></p>
-    </p>
-    <p>
-        <b>IN</b>
-        <p>In order to define values for the IN operator, they should be comma delimited</p>
-        <p>If we want to find customers from Germany (country ID 79) and Austria (country ID 13), we will add a query parameter in the following form <span class="code">CountryId=13,79</span></p>
-    </p>
+    <div class="query-building">
+        <p>
+            A query can be constructed using any one of the members which allows a query operation. Each part of the query is an independant query parameter.
+        </p>
+        <p>
+            <b>Min/Max</b>
+            <p>In order to define a minimum value you'll need to suffix the Min to the member name and specify a value. The same applies for a mximum value with a Max suffix</p>
+            <p>To find customers with at least 10 copiers you need to add a query parameter in the following form <span class="code">CopiersMin=10</span>.</p>
+            <p>If we would like to find customers with a gain between 10-30% we will add these query parameters: <span class="code">GainMin=10&amp;GainMax=30</span></p>
+        </p>
+        <p>
+            <b>IN</b>
+            <p>In order to define values for the IN operator, they should be comma delimited</p>
+            <p>If we want to find customers from Germany (country ID 79) and Austria (country ID 13), we will add a query parameter in the following form <span class="code">CountryId=13,79</span></p>
+        </p>
 
-    <p>
-        <b>Equality</b>
-        <p>The equality type is used for boolean values. In order to use it you need to set a query parameter with a boolean value</p>
-        <p>If we want to filter for users who are popular investors we will add a query parameter in the following form <span class="code">IsPopularInvestor=true</span></p>
-    </p>
+        <p>
+            <b>Equality</b>
+            <p>The equality type is used for boolean values. In order to use it you need to set a query parameter with a boolean value</p>
+            <p>If we want to filter for users who are popular investors we will add a query parameter in the following form <span class="code">IsPopularInvestor=true</span></p>
+        </p>
+    </div>
 </body>
 
 </html>
