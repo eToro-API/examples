@@ -1,0 +1,2948 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>eToro.Trading</name>
+    </assembly>
+    <members>
+        <member name="T:eToro.Trading.LoginProvider">
+            <summary>
+            Login Provider
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.LoginProvider.Create(System.String,System.String,System.String,eToro.Trading.ILogger)">
+            <summary>
+            Create a login context
+            </summary>
+            <param name="Username">Username</param>
+            <param name="Password">Password</param>
+            <param name="APIKey">API Key</param>
+            <param name="Logger">Optional Logger</param>
+            <returns>Login Context</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.ExternalFeeItem">
+            <summary>
+            Fee Item
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExternalFeeItem.Daily">
+            <summary>
+            Daily Fee
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExternalFeeItem.Weekly">
+            <summary>
+            Weekly Fee
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.InstrumentFeeItem">
+            <summary>
+            Fee Structure for an asset
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.InstrumentFeeItem.InstrumentId">
+            <summary>
+            Instrument ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.InstrumentFeeItem.LeveragedSellFees">
+            <summary>
+            Leveraged Sell Fees
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.InstrumentFeeItem.NonLeveragedSellFees">
+            <summary>
+            Non-Leveraged Sell Fees
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.InstrumentFeeItem.LeveragedBuyFees">
+            <summary>
+            Leveraged Buy Fees
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.InstrumentFeeItem.NonLeveragedBuyFees">
+            <summary>
+            Non Leveraged Sell Fees
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.EquityItem">
+            <summary>
+            Equity Item
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EquityItem.Credit">
+            <summary>
+            Current Credit in the account base currency
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EquityItem.Investment">
+            <summary>
+            The current invested amount in the account base currency
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EquityItem.WithdrawableAmount">
+            <summary>
+            The amount of money that the customer may withdraw in the account base currency
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Equity.HistoricEquityPeriod">
+            <summary>
+            Historic Periods
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Equity.HistoricEquityPeriod.Daily">
+            <summary>
+            Daily Period
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.ErrorHandlingMapper.FromInternal(System.Int32)">
+            <summary>
+            Get Error Type from internal representation
+            </summary>
+            <param name="Internal">Internal error representation</param>
+            <returns>Error</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.TradingErrorType">
+            <summary>
+            Trade Error
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.General">
+            <summary>
+            Unknown Error
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.LoginFailure">
+            <summary>
+            Login Operation Failed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.ExitOrderGeneralError">
+            <summary>
+            Misc errors during execution of an exit order, or system execution of stoploss or take profit operations
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.ExitOrderNoPosition">
+            <summary>
+            Attempt to create an exit order on a position ID which does not exist
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.ExitOrderConflictDueToClose">
+            <summary>
+            Exit order cannot be closed as it already being closed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.ExitOrderCreateError">
+            <summary>
+            Creation of exit order failed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.ExitOrderDeleteError">
+            <summary>
+            Delete of exit order failed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderGeneralError">
+            <summary>
+            Misc errors during creation of an entery order
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderAlreadyExecuted">
+            <summary>
+            Attempt to modify an entry order which has been executed, or is currently executed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderRateRangeViolation">
+            <summary>
+            In case the rate which the client had at the time of the IOC entry order request vs the system rate is beyond
+            a boundry - the entry order will be automatically cancelled
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderCreateError">
+            <summary>
+            Creation of entry order failed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderDeleteError">
+            <summary>
+            Deletion of entry order failed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderMinimumInvestment">
+            <summary>
+            Entry order. The invested amount is lower than the minimum required. The minimum can be defined according to
+            the leverage as well
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderMaximumUnits">
+            <summary>
+            An entry order attempted to create an order which would have exceeded the maximum
+            number of units which can be held on the asset
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderUnsupportedLeverage">
+            <summary>
+            The entry order contains an unsupported leverage for this account
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderInvalidStopLossOrTakeProfit">
+            <summary>
+            Invalid stop loss or take profit on order. Possible reasons may be that they are invalid according to the order
+            direction, or are too close to the current rate
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderInstrumentDisabled">
+            <summary>
+            Entry orders are not allowed on this instrument
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderLeverageTooLow">
+            <summary>
+            Leverage is lower than the minimum leverage for this asset
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderInstrumentBuyDisabled">
+            <summary>
+            Buy operations are not allowed on this instrument
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderInstrumentSellDisabled">
+            <summary>
+            Sell operations are not allowed on this instrument
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.EntryOrderLeverageTooHigh">
+            <summary>
+            Leverage is above the maximum system or user restriction
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.MaximumTradesExceeded">
+            <summary>
+            The entry order could not be executed as it will cause the system to exceed the total number of 
+            concurrent trades per account
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.OrderNotFound">
+            <summary>
+            Entry or exit order IDs were not found
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.SocialTradeTradeConflict">
+            <summary>
+            A trade which is a child of a social trade may not be edited or closed individually. In order to close such a trade
+            the whole social trade must be closed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.SocialTradingOrphanedOrder">
+            <summary>
+            In social trading we might create an entery order to mimic the parent portfolio, however we might
+            encounter a case where during the execution of the order - the parent trade is already closed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.SocialTradeConflictDueToClose">
+            <summary>
+            Social trade is is the process of being closed - no operations can be executed upon it
+            till the full closure
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.SocialTradeUnableToProcessDividend">
+            <summary>
+            Unable to process social trading divided
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.SocialTradingMinimumAmount">
+            <summary>
+            The operation would have caused the social trade to have an equity below its minimum
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.SocialTradingMinimumInvestment">
+            <summary>
+            Social Trading investment is less than minimum
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.SocialTradingInvalidStopLoss">
+            <summary>
+            Socail trading stop loss is outside the boundries
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.InsufficientFunds">
+            <summary>
+            Insufficient funds for the requested operation
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.TakeProfitInvalid">
+            <summary>
+            Invalid take profit rate. May be either while creating an entry order or editing an existing trade. One
+            of the more common reasons is that the given rate is too close to the current market rate
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.StopLossInvalid">
+            <summary>
+            Invalid stop loss rate. May occur during creation of an entry order or editing an existing trade. One of the more 
+            common reasons is that the stop loss rate is too close to the current market rate.
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.StopLossConflictDueToClose">
+            <summary>
+            Stop loss modification is not possible as the trade is currently being closed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.TakeProfitConflictDueToClose">
+            <summary>
+            Take profit modification is not possible as the trading is currently being closed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.StopLossError">
+            <summary>
+            General error during modification of a stop loss. The most common reason is that the asset
+            is currently suspended for trading
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.StopLossGeneralError">
+            <summary>
+            General error on attempting to edit the stop loss. The most common reason is that trading is currently
+            suspended for the unerlying asset
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.TakeProfitGeneralError">
+            <summary>
+            General error on attempting to edit the take profit rate. The most common reason is that trading is 
+            currently suspended on for the underlying asset
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.TrailingStopLossError">
+            <summary>
+            Setting the trailing stop loss failed. Common reasons may be that the trade is being executed, or the instrument
+            is not tradable
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.RestrictionExecution">
+            <summary>
+            This operation is restricted for this account
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.RestrictionCopyTradingBlocked">
+            <summary>
+            Restriction - Copy trading is blocked. Blocking may be attributed to a system setting or a high
+            risk
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.RestrictionByCustomer">
+            <summary>
+            Operation contradicts a customer set restriction
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.ClosePositionError">
+            <summary>
+            General error during closing of a trade
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.InstrumentUnavailable">
+            <summary>
+            Instrument is temporary suspended for trading
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.TradingErrorType.PositionNotFound">
+            <summary>
+            The position ID referenced in the request was not found or was missing
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionMgsType">
+            <summary>
+            Immediate Execution
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionMgsType.EventId">
+            <summary>
+            Event ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionMgsType.Position">
+            <summary>
+            Opened Position
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType">
+            <summary>
+            Executed Position
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.MirrorId">
+            <summary>
+            Mirror ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.OpenedOn">
+            <summary>
+            Opening Timestamp
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.OpenRate">
+            <summary>
+            Opening Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.OrderId">
+            <summary>
+            Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.StopLoss">
+            <summary>
+            Stop Loss
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.TakeProfit">
+            <summary>
+            Take Profit
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.ExecutedPositionType.Units">
+            <summary>
+            Number of units
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver._Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.#ctor(eToro.Trading.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Logger">Logger</param>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.SupportedEvents">
+            <summary>
+            Supported Events
+            </summary>
+            <returns>List of event names which can be handled by the resolver</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.Family">
+            <summary>
+            Family of the event
+            </summary>
+            <returns>Notification Family</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.EntryOrder.EntryOrderResolver.GenerateEvent(System.String,System.String)">
+            <summary>
+            Generate Event from contents
+            </summary>
+            <param name="Topic">Event Topic</param>
+            <param name="EventContent">Event Contents</param>
+            <returns>Context</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderResponse">
+            <summary>
+            Create Exit Order
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderResponse.CustomerId">
+            <summary>
+            Customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderResponse.OrderDetails">
+            <summary>
+            The actual order
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderResponse.EventId">
+            <summary>
+            Event ID
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderItem">
+            <summary>
+            Order Details
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderItem.CustomerId">
+            <summary>
+            Customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderItem.OrderId">
+            <summary>
+            Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderItem.OpenDateTime">
+            <summary>
+            Creation Timestamp
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderItem.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderItem.InstrumentId">
+            <summary>
+            Instrument ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.CreateExitOrderItem.MirrorId">
+            <summary>
+            Mirror ID
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.OpenMessage">
+            <summary>
+            Order Executed
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.OpenMessage.OrderId">
+            <summary>
+            Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.OpenMessage.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.OpenMessage.Occurred">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.OpenMessage.EventId">
+            <summary>
+            Event ID
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.FailureMessage">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.FailureMessage.OrderId">
+            <summary>
+            Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.FailureMessage.ErrorId">
+            <summary>
+            Error Code
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.FailureMessage.EventId">
+            <summary>
+            Event ID
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.EventMap">
+            <summary>
+            Event Map
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver._Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.#ctor(eToro.Trading.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Logger">Logger</param>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.SupportedEvents">
+            <summary>
+            Supported Events
+            </summary>
+            <returns>List of event names which can be handled by the resolver</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.Family">
+            <summary>
+            Family of the event
+            </summary>
+            <returns>Notification Family</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.ExitOrders.ExitOrderResolver.GenerateEvent(System.String,System.String)">
+            <summary>
+            Generate Event from contents
+            </summary>
+            <param name="Topic">Event Topic</param>
+            <param name="EventContent">Event Contents</param>
+            <returns>Context</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver">
+            <summary>
+            Close Trade Resolver
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ReasonMap">
+            <summary>
+            Close Reasons
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.FromCloseReason(System.Int32)">
+            <summary>
+            Convert to close reason
+            </summary>
+            <param name="ReasonCode">Reason Code</param>
+            <returns>Reason</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalCloseSlTpType">
+            <summary>
+            Close on stop loss
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalCloseSlTpType.CustomerId">
+            <summary>
+            Customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalCloseSlTpType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalCloseSlTpType.EndRate">
+            <summary>
+            Closing Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalCloseSlTpType.InstrumentId">
+            <summary>
+            Instrument ID
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionErrType">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionErrType.CustomerId">
+            <summary>
+            Customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionErrType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionErrType.ErrorCode">
+            <summary>
+            Error Code
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionErrType.EventId">
+            <summary>
+            Event ID
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionRolloverNotificationType">
+            <summary>
+            Rollover close
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionRolloverNotificationType.CustomerId">
+            <summary>
+            Customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionRolloverNotificationType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionRolloverNotificationType.EndRate">
+            <summary>
+            Close Rate
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType">
+            <summary>
+            Close Position
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.CustomerId">
+            <summary>
+            Customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.NetProfit">
+            <summary>
+            Net Profit
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.CloseReason">
+            <summary>
+            Closing Reason
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.EndRate">
+            <summary>
+            End Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.EventId">
+            <summary>
+            Event ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.ExitOrderId">
+            <summary>
+            Exit Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.ExternalClosePositionNotificationType.OccurredAt">
+            <summary>
+            Closing Timestamp
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.EventMap">
+            <summary>
+            Event Map
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.IgnoreList">
+            <summary>
+            Messages to Ignore
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver._Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.#ctor(eToro.Trading.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Logger">Logger</param>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.SupportedEvents">
+            <summary>
+            Supported Events
+            </summary>
+            <returns>List of event names which can be handled by the resolver</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.Family">
+            <summary>
+            Family of the event
+            </summary>
+            <returns>Notification Family</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.CloseTradeResolver.GenerateEvent(System.String,System.String)">
+            <summary>
+            Generate Event from contents
+            </summary>
+            <param name="Topic">Event Topic</param>
+            <param name="EventContent">Event Contents</param>
+            <returns>Context</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver">
+            <summary>
+            Edit Trade Event Resolver
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.SuccessMsgType">
+            <summary>
+            Successful Response
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.SuccessMsgType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.SuccessMsgType.EventId">
+            <summary>
+            Original Event ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.SuccessMsgType.TrailingStopLoss">
+            <summary>
+            Trailing Stop Loss State
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.SuccessMsgType.StopLoss">
+            <summary>
+            Stop Loss State
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.SuccessMsgType.TakeProfit">
+            <summary>
+            Take Profit State
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.ErrMsgType">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.ErrMsgType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.ErrMsgType.ErrorId">
+            <summary>
+            Error Code
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.ErrMsgType.EventId">
+            <summary>
+            Event ID
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.TopicToSuccess">
+            <summary>
+            Topics
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver._Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.#ctor(eToro.Trading.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Logger">Logger</param>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.SupportedEvents">
+            <summary>
+            Supported Events
+            </summary>
+            <returns>List of event names which can be handled by the resolver</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.Family">
+            <summary>
+            Family of the event
+            </summary>
+            <returns>Notification Family</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.Trades.EditTradeResolver.GenerateEvent(System.String,System.String)">
+            <summary>
+            Generate Event from contents
+            </summary>
+            <param name="Topic">Event Topic</param>
+            <param name="EventContent">Event Contents</param>
+            <returns>Context</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.NotificationFamilyType">
+            <summary>
+            Notification Family
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.NotificationFamilyType.EntryOrder">
+            <summary>
+            Entry Order
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.NotificationFamilyType.ExitOrder">
+            <summary>
+            Exit Order
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.Objects.Notifications.NotificationFamilyType.Trade">
+            <summary>
+            Trade
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.Objects.Notifications.INotificationResolver">
+            <summary>
+            Notification Resolver
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.INotificationResolver.SupportedEvents">
+            <summary>
+            Supported Events
+            </summary>
+            <returns>List of event names which can be handled by the resolver</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.INotificationResolver.Family">
+            <summary>
+            Family of the event
+            </summary>
+            <returns>Notification Family</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.Objects.Notifications.INotificationResolver.GenerateEvent(System.String,System.String)">
+            <summary>
+            Generate Event from contents
+            </summary>
+            <param name="Topic">Event Topic</param>
+            <param name="EventContent">Event Contents</param>
+            <returns>Context</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.TimeSeriedEquityItem">
+            <summary>
+            Time series equity item
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.Start">
+            <summary>
+            Start Time
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.Gain">
+            <summary>
+            Gain
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.IsSimulation">
+            <summary>
+            Simulation
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.StartCredit">
+            <summary>
+            Start Credit
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.StartInvestment">
+            <summary>
+            Start Investment
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.StartPnL">
+            <summary>
+            Start P&amp;L
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.StartEquity">
+            <summary>
+            Start Equity
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.EndCredit">
+            <summary>
+            End Credit
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.EndInvestment">
+            <summary>
+            End Investment
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.EndPnL">
+            <summary>
+            End P&amp;L
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.EndEquity">
+            <summary>
+            End Equity
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.PositiveCashflows">
+            <summary>
+            Positive Cashflows
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TimeSeriedEquityItem.NegativeCashflows">
+            <summary>
+            Negative Cashflows
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.ClosedPositionType">
+            <summary>
+            Closed Position
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ClosedPositionType.NetProfit">
+            <summary>
+            Net Profit of the trade. The value is in the base currency of the account
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ClosedPositionType.CloseRate">
+            <summary>
+            The rate in which the trade was closed
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ClosedPositionType.CloseTimestamp">
+            <summary>
+            The timestamp of the close
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.BaseExecutionReport">
+            <summary>
+            Base Execution Report
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseExecutionReport.ExecutionId">
+            <summary>
+            Execution Id
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseExecutionReport.ErrorId">
+            <summary>
+            Error ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseExecutionReport.TradeError">
+            <summary>
+            Trading error enumeration. 
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseExecutionReport.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.APIEntryOrderType">
+            <summary>
+            API Order Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.InstrumentId">
+            <summary>
+            Instrument ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.IsBuy">
+            <summary>
+            Buy
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.Investment">
+            <summary>
+            Invested Amount
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.OrderType">
+            <summary>
+            Order Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.ExecutionType">
+            <summary>
+            Execution Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.StopLossRate">
+            <summary>
+            Stop Loss Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.StopLossPct">
+            <summary>
+            Stop Loss Percentage
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.TakeProfitRate">
+            <summary>
+            Take Profit Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.TakeProfitPct">
+            <summary>
+            Take Profit Percentage
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.LimitRate">
+            <summary>
+            Limit Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.APIEntryOrderType.IsTrailingStopLoss">
+            <summary>
+            Trailing Stop Loss
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.EntryOrderMarketGTC">
+            <summary>
+            Market Order Good Till Cancelled
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.EntryOrderMarketGTC.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.EntryOrderMarketGTC.#ctor(System.Int32,System.Boolean,System.Int32,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="InstrumentId">Instrument ID</param>
+            <param name="IsBuy">Buy/Sell</param>
+            <param name="Leverage">Leverage</param>
+            <param name="Investment">Investment</param>
+            <param name="StopLossPct">Stop Loss Percentage</param>
+            <param name="TakeProfitPct">Take Profit Percentage</param>
+        </member>
+        <member name="T:eToro.Trading.Trade.EntryOrderMarketIOC">
+            <summary>
+            Market Order - Immediate Or Cancel
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.EntryOrderMarketIOC.#ctor(System.Int32,System.Boolean,System.Int32,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="InstrumentId">Instrument ID</param>
+            <param name="IsBuy">Buy/Sell</param>
+            <param name="Leverage">Leverage</param>
+            <param name="Investment">Investment</param>
+            <param name="StopLossRate">Stop Loss Rate</param>
+            <param name="TakeProfitRate">Take Profit Rate</param>
+        </member>
+        <member name="T:eToro.Trading.Trade.BaseRateEntryOrder">
+            <summary>
+            Basic Rate based Order
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.BaseRateEntryOrder.#ctor(System.Int32,System.Boolean,System.Int32,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Base Rate Order
+            </summary>
+            <param name="InstrumentId"></param>
+            <param name="IsBuy"></param>
+            <param name="Leverage"></param>
+            <param name="Investment"></param>
+            <param name="StopLossRate"></param>
+            <param name="TakeProfitRate"></param>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseRateEntryOrder.StopLossRate">
+            <summary>
+            Stop Loss Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseRateEntryOrder.TakeProfitRate">
+            <summary>
+            Take Profit Rate
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.BaseRateEntryOrder.ToAPIOrder">
+            <summary>
+            To an API Order
+            </summary>
+            <returns>API Order</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.BaseGTCEntryOrder">
+            <summary>
+            Good Till Cancelled Order Type
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.BaseGTCEntryOrder.#ctor(System.Int32,System.Boolean,System.Int32,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Protected constructor
+            </summary>
+            <param name="InstrumentId">Instrument ID</param>
+            <param name="IsBuy">Buy/Sell</param>
+            <param name="Leverage">Leverage</param>
+            <param name="Investment">Investment</param>
+            <param name="StopLossPct">Stop Loss Percentage</param>
+            <param name="TakeProfitPct">Take Profit Percentage</param>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseGTCEntryOrder.StopLossPct">
+            <summary>
+            Stop-Loss Percentage. The percentage will determine the stop loss rate when the 
+            order will be executed. 
+            For example if we invest $10,000 and set the stoploss percentage
+            to 40% - it will imply that we set our maximum loss to $4,000. We will then take the 
+            executed order and set the stop loss rate accordingly
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseGTCEntryOrder.TakeProfitPct">
+            <summary>
+            Take Profit Percentage. The percentage will determine the take profit rate when
+            the order will be executed. 
+            For example if we Invest $10,000 and set the take profit percentage to 10%. When the
+            order will be executed we will set the take profit rate and set it to reflect a profit
+            of $1,000
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.BaseGTCEntryOrder.ToAPIOrder">
+            <summary>
+            To an API Order
+            </summary>
+            <returns>API Order</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.BaseEntryOrder">
+            <summary>
+            Base Order Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseEntryOrder.InstrumentId">
+            <summary>
+            Instrument ID.The full list of instrument IDs can be obtained using the Metadata/Instruments API call
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseEntryOrder.IsBuy">
+            <summary>
+            Buy/Sell. For long positions the value is true, and for short the value is false
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseEntryOrder.Leverage">
+            <summary>
+            Leverage. To get the available leverage there is a need to get the trading metadata
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseEntryOrder.Investment">
+            <summary>
+            Invested Amount in the account base currency
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseEntryOrder.OrdType">
+            <summary>
+            Order Type. Order types can be either Market or Limit
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.BaseEntryOrder.Mode">
+            <summary>
+            Order Validity. The validity of the order can be Good till Cancelled or Immediate or Cancel
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.BaseEntryOrder.ToAPIOrder">
+            <summary>
+            To Internal API 
+            </summary>
+            <returns>API Call</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.ExecutionMode">
+            <summary>
+            Order Validity
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.ExecutionMode.IOC">
+            <summary>
+            Immediate or Cancel
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.ExecutionMode.GTC">
+            <summary>
+            Good till Cancelled
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.LoginContext">
+            <summary>
+            Login Context
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.LoginContext.LoginResponse">
+            <summary>
+            Response from Login
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.LoginResponse.Token">
+            <summary>
+            STS Token
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.LoginResponse.CsrfToken">
+            <summary>
+            Anti CSRF Token
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.LoginResponse.RealCustomerId">
+            <summary>
+            Real system customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.LoginResponse.DemoCustomerId">
+            <summary>
+            Demo system customer ID
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.LoginContext._APIKey">
+            <summary>
+            API Key
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.LoginContext._LoginData">
+            <summary>
+            Login Data
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.LoginContext._Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.LoginContext.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="APIKey">API Key</param>
+        </member>
+        <member name="M:eToro.Trading.Trade.LoginContext.#ctor(System.String,System.String,System.String,eToro.Trading.ILogger)">
+            <summary>
+            Constructor for the login context
+            </summary>
+            <param name="Username">Username</param>
+            <param name="Password">Password</param>
+            <param name="APIKey">API Key from the eToro API portal</param>
+            <param name="Logger">Optional Logging</param>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.XsrfToken">
+            <summary>
+            Anti CSRF Token
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.Token">
+            <summary>
+            STS Token
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.APIKey">
+            <summary>
+            API Key
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.RealCustomerId">
+            <summary>
+            Real Customer ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.LoginContext.DemoCustomerId">
+            <summary>
+            Demo Customer ID
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.LoginContext.Login">
+            <summary>
+            Execute Login
+            </summary>
+            <returns>Login Response</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.OnEntryOrderExecutionReportHandler">
+            <summary>
+            Delegate on entry order execution report
+            </summary>
+            <param name="ExecutionReport">Execution Report</param>
+        </member>
+        <member name="T:eToro.Trading.Trade.OnExitOrderExecutionReportHandler">
+            <summary>
+            Delegate on exit order execution report
+            </summary>
+            <param name="ExecutionReport">Execution Report</param>
+        </member>
+        <member name="T:eToro.Trading.Trade.OnCloseTradeExecutionReportHandler">
+            <summary>
+            Delegate on close trade
+            </summary>
+            <param name="ExecutionReport">Execution Report</param>
+        </member>
+        <member name="T:eToro.Trading.Trade.OnEditTradeExecutionReportHandler">
+            <summary>
+            Delegate on edit trade
+            </summary>
+            <param name="ExecutionReport">Execution Report</param>
+        </member>
+        <member name="T:eToro.Trading.Trade.MetadataItem">
+            <summary>
+            Asset Metadata
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.InstrumentId">
+            <summary>
+            Instrument ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.Precision">
+            <summary>
+            Precision
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.MaxPositionUnits">
+            <summary>
+            Max units
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.IsDelisted">
+            <summary>
+            De-listed
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.Leverages">
+            <summary>
+            Allowed Leverages
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.DefaultLeverage">
+            <summary>
+            Default Leverage 
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.MinPositionAmount">
+            <summary>
+            Minimum Trade Amount
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.MaxStopLossPercentage">
+            <summary>
+            Maximum stop loss percentage
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.MaxTakeProfitPercentage">
+            <summary>
+            Maximum take profit percentage
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowSell">
+            <summary>
+            Allow Sell
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowBuy">
+            <summary>
+            Allow Buy
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowLimitOrderGTC">
+            <summary>
+            Allow Pending Orders
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowMarketOrderGTC">
+            <summary>
+            Allow Entry Orders
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowExitOrderIOC">
+            <summary>
+            Allow Close Position
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowExitOrderGTC">
+            <summary>
+            Allow Exit Order
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowTradeEdit">
+            <summary>
+            Allow Editing Position
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.MetadataItem.AllowMarketOrderIOC">
+            <summary>
+            Allow Trading
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.ExitOrderType">
+            <summary>
+            Exit Order
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderType.OrderId">
+            <summary>
+            Exit Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderType.PositionId">
+            <summary>
+            Position ID to be closed
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderType.OpenTimestamp">
+            <summary>
+            Timestamp of opening the request
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderType.SocialTradeId">
+            <summary>
+            Social Trade ID, in case this trade belongs to a social trade
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.EntryOrderExecutionReportType">
+            <summary>
+            Entry Order Execution Report
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.EntryOrderExecutionReportType.ExecutionType">
+            <summary>
+            Execution Type
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.EntryOrderExecutionReportType.ExecutionType.Deleted">
+            <summary>
+            Closed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.EntryOrderExecutionReportType.ExecutionType.Created">
+            <summary>
+            Executed (Opened)
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.EntryOrderExecutionReportType.ExecutionType.Executed">
+            <summary>
+            Executed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.EntryOrderExecutionReportType.ExecutionType.Failure">
+            <summary>
+            Failure
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.OrderId">
+            <summary>
+            Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.PositionId">
+            <summary>
+            Position ID. This will be returned if the order was of MKT/IOC type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.EventType">
+            <summary>
+            Event Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.OpenTimestamp">
+            <summary>
+            Opening timestamp
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.ExecutionRate">
+            <summary>
+            For events of event type execution, will define the execution rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.Units">
+            <summary>
+            For events of event type execution - defines the number of units on the trade
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.StopLossRate">
+            <summary>
+            Stop Loss Rate. This will be relevant for MKT/IOC orders
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.TakeProfitRate">
+            <summary>
+            Take Profit Rate. This will be relevant for MKT/IOC orders
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderExecutionReportType.IsSuccess">
+            <summary>
+            Success ?
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.ExitOrderExecutionReportType">
+            <summary>
+            Exit Order Execution Report
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.ExitOrderExecutionReportType.ExecutionType">
+            <summary>
+            Execution Type
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.ExitOrderExecutionReportType.ExecutionType.Deleted">
+            <summary>
+            Closed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.ExitOrderExecutionReportType.ExecutionType.Created">
+            <summary>
+            Executed (Opened)
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.ExitOrderExecutionReportType.ExecutionType.Executed">
+            <summary>
+            Executed
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.ExitOrderExecutionReportType.ExecutionType.Failure">
+            <summary>
+            Failure
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderExecutionReportType.OrderId">
+            <summary>
+            Order ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderExecutionReportType.EventType">
+            <summary>
+            Event Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderExecutionReportType.OpenTimestamp">
+            <summary>
+            Timestamp of opening the order
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExitOrderExecutionReportType.PositionId">
+            <summary>
+            Position ID, when the order is executed will contain a non 0 value
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.CloseTradeExecutionReportType">
+            <summary>
+            Close Trade Execution Report
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.CloseTradeExecutionReportType.CloseReasonType">
+            <summary>
+            Closing Reason Type
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.CloseTradeExecutionReportType.CloseReasonType.Customer">
+            <summary>
+            Customer Request
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.CloseTradeExecutionReportType.CloseReasonType.StopLoss">
+            <summary>
+            Stop Loss
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.CloseTradeExecutionReportType.CloseReasonType.TakeProfit">
+            <summary>
+            Take Profit
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.CloseTradeExecutionReportType.CloseReasonType.Other">
+            <summary>
+            Others
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.CloseTradeExecutionReportType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.CloseTradeExecutionReportType.Reason">
+            <summary>
+            Reason for closing
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.CloseTradeExecutionReportType.CloseRate">
+            <summary>
+            Closing Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.CloseTradeExecutionReportType.NetProfit">
+            <summary>
+            Net Profit
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.CloseTradeExecutionReportType.CloseTimestamp">
+            <summary>
+            Closing Timestamp
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.CloseTradeExecutionReportType.OrderId">
+            <summary>
+            Order ID, in case the trade was opened through an exit order request
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.EditTradeExecutionReportType">
+            <summary>
+            Edit Trade Execution Report
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EditTradeExecutionReportType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EditTradeExecutionReportType.StopLossRate">
+            <summary>
+            Stop Loss Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EditTradeExecutionReportType.TakeProfitRate">
+            <summary>
+            Take Profit Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EditTradeExecutionReportType.TrailingStopLoss">
+            <summary>
+            Trailing Stop Loss Enabled
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.OrderTypes">
+            <summary>
+            Order Types
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.OrderTypes.MKT">
+            <summary>
+            Market
+            </summary>
+            <remarks>
+            A market order will be executed in the market rate
+            </remarks>
+        </member>
+        <member name="F:eToro.Trading.Trade.OrderTypes.LMT">
+            <summary>
+            Limit
+            </summary>
+            <remarks>
+            A limit order will execute when the limit rate of the order will strike
+            </remarks>
+        </member>
+        <member name="T:eToro.Trading.Trade.PositionType">
+            <summary>
+            Position
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.PositionId">
+            <summary>
+            Position ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.InstrumentId">
+            <summary>
+            Instrument ID of the trade
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.IsBuy">
+            <summary>
+            Buy or Sell
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.Leverage">
+            <summary>
+            Position Leverage
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.OpenRate">
+            <summary>
+            Open Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.OpenTimestamp">
+            <summary>
+            Open Timestamp
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.StopLossRate">
+            <summary>
+            Stop Loss Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.TakeProfitRate">
+            <summary>
+            Take Profit Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.TrailingStopLoss">
+            <summary>
+            Trailing Stop Loss Enabled
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.OrderId">
+            <summary>
+            Order ID
+            </summary>
+            <remarks>The order ID will always be 0 for positions opened at MKT</remarks>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.SocialTradeId">
+            <summary>
+            Social Trade ID
+            </summary>
+            <remarks>Social trade ID will be a non-zero value only for trades opened in a social trading context</remarks>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.ParentPositionId">
+            <summary>
+            Parent Position ID
+            </summary>
+            <remarks>The parent position ID will be non-zero value for trades opened in a social trading context</remarks>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.Investment">
+            <summary>
+            Current Investment
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.InitialInvestment">
+            <summary>
+            Initial Invested Amount
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.Fees">
+            <summary>
+            Total Fees
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.PositionType.Units">
+            <summary>
+            Number of units held
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.LimitOrder">
+            <summary>
+            Limit Order
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.LimitOrder.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.LimitOrder.#ctor(System.Int32,System.Boolean,System.Int32,System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Constructor
+            </summary>
+            <remarks>
+            <description>For a full list of Instrument ID's refer to the Metadata/Instruments API</description>
+            </remarks>
+            <param name="InstrumentId">Instrument ID. </param>
+            <param name="IsBuy">Buy/Sell. Buy is true and Sell is false</param>
+            <param name="Leverage">Leverage. The trade leverage.</param>
+            <param name="Investment">Investment amount in account base currency</param>
+            <param name="StopLossRate">Stop Loss Rate</param>
+            <param name="TakeProfitRate">Take Profit Rate</param>
+            <param name="LimitRate">Limit Rate. The rate which the trade should be opened</param>
+        </member>
+        <member name="P:eToro.Trading.Trade.LimitOrder.LimitRate">
+            <summary>
+            Limit Rate
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.ExecutionContextType">
+            <summary>
+            Execution Context Type
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.ExecutionContextType.#ctor">
+            <summary>
+            Empty Constructor
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.ExecutionContextType.#ctor(eToro.Trading.Trade.TradesProvider.APIExecutionResponse)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="ApiResponse">API Response</param>
+        </member>
+        <member name="P:eToro.Trading.Trade.ExecutionContextType.ExecutionId">
+            <summary>
+            Execution Id
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.EntryOrderType">
+            <summary>
+            Order
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.OrderId">
+            <summary>
+            Order ID. Note that the order ID may be negative
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.IsEntry">
+            <summary>
+            Entry or Exit Order
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.OrderType">
+            <summary>
+            Order Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.StopLossPct">
+            <summary>
+            Stop-Loss Percentage. The percentage will determine the stop loss rate when the 
+            order will be executed. 
+            For example if we invest $10,000 and set the stoploss percentage
+            to 40% - it will imply that we set our maximum loss to $4,000. We will then take the 
+            executed order and set the stop loss rate accordingly
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.TakeProfitPct">
+            <summary>
+            Take Profit Percentage. The percentage will determine the take profit rate when
+            the order will be executed. 
+            For example if we Invest $10,000 and set the take profit percentage to 10%. When the
+            order will be executed we will set the take profit rate and set it to reflect a profit
+            of $1,000
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.StopLossRate">
+            <summary>
+            Stop Loss Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.TakeProfitRate">
+            <summary>
+            Take Profit Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.LimitRate">
+            <summary>
+            Limit Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.PositionId">
+            <summary>
+            Position ID. Relevant for exit orders only
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.SocialTradeId">
+            <summary>
+            Social Trade ID. Relevant for exit orders only
+            </summary>
+            <remarks>Social trade ID will be a non-zero value only for trades opened in a social trading context</remarks>
+        </member>
+        <member name="P:eToro.Trading.Trade.EntryOrderType.ParentPositionId">
+            <summary>
+            Parent Position ID. Relevant for exit orders only
+            </summary>
+            <remarks>The parent position ID will be non-zero value for trades opened in a social trading context</remarks>
+        </member>
+        <member name="T:eToro.Trading.Trade.TradeMetadataType">
+            <summary>
+            Meta data for trading activity
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradeMetadataType.InstrumentId">
+            <summary>
+            Instrument ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradeMetadataType.Leverages">
+            <summary>
+            Available leverages for trading on this instrument
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradeMetadataType.Precision">
+            <summary>
+            The precision of the instrument rates
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradeMetadataType.MaxStopLossPercentage">
+            <summary>
+            Maximum Stop Loss Percentage when opening Good till Cancelled orders
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradeMetadataType.MaxTakeProfitPercentage">
+            <summary>
+            Maximum Take Profit Percentage when opening Good till Cancelled orders
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradeMetadataType.IsBuyAllowed">
+            <summary>
+            Does this instrument support Buy orders
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradeMetadataType.IsSellAllowed">
+            <summary>
+            Does this instrument support Sell orders
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.ITradeProvider">
+            <summary>
+            Trade Provider Interface.
+            
+            This provides all the core functionality needed to trade in the eToro system
+            </summary>
+            <remarks>
+            Trading events are a-synchronous in their nature. In this protocol any trading
+            event will return an execution context.
+            
+            Once the trading event has been executed one of the events will be 
+            executed with the execution report, according to the request type.
+            
+            Matching the execution report with the execution context can be done using the
+            execution ID property
+            
+            It is important to note that some messages might be triggered without a direct request
+            for example the OnEntryOrderExecutionReport might be triggered when an entry order 
+            is executed.
+            
+            In These types of events, the execution report will not contain the execution context
+            </remarks>
+        </member>
+        <member name="E:eToro.Trading.Trade.ITradeProvider.OnEntryOrderExecutionReport">
+            <summary>
+            Event on entry order execution report
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Trade.ITradeProvider.OnExitOrderExecutionReport">
+            <summary>
+            Event on exit order execution report
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Trade.ITradeProvider.OnCloseTradeExecutionReport">
+            <summary>
+            Event on close trade
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Trade.ITradeProvider.OnEditTradeExecutionReport">
+            <summary>
+            Event on edit trade
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.GetMetadata(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Get trading metadata on instruments
+            </summary>
+            <remarks>
+            The trading metadata contains information which defines the trading properties allowed on an instrument.
+            These properties include the available leverages, if we are allowed to take a long or short position, etc.
+            </remarks>
+            <param name="InstrumentIds">Requested instrument ids. If omitted will return all the available instruments</param>
+            <returns>Map of instrument id and its metadata</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.GetFees(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Get Fees on instruments
+            </summary>
+            <param name="InstrumentIds">Instrument ids, if omiteted, will return all the available instruments</param>
+            <returns>Map of instrument ID and fees</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.EntryOrders">
+            <summary>
+            Get Pending Orders
+            </summary>
+            <returns>Orders</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.CreateEntryOrder(eToro.Trading.Trade.EntryOrderMarketGTC)">
+            <summary>
+            Create Order
+            </summary>
+            <param name="Order">Market Order GTC</param>
+            <returns>Execution Context</returns>
+            <remarks>
+            A market entry order with a good till cancelled validity will execute as 
+            soon as trading is available for the asset. In cases where trading is available
+            for the requested asset, it will be executed immediately, and there will be no
+            option to cancel this request.
+            </remarks>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.CreateEntryOrder(eToro.Trading.Trade.EntryOrderMarketIOC)">
+            <summary>
+            Create Order
+            </summary>
+            <param name="Order">Market Order Immediate Or Cancel</param>
+            <returns>Execution Context</returns>
+            <remarks>
+            A market entry order with an immediate or cancel validity will attempt to
+            execute the trade immediately, if the market is currently closed for the requested
+            instrument we will get a failure through an execution report
+            </remarks>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.CreateEntryOrder(eToro.Trading.Trade.LimitOrder)">
+            <summary>
+            Create Order
+            </summary>
+            <param name="Order">Limit Order</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.CancelEntryOrder(System.Int32,eToro.Trading.Trade.OrderTypes)">
+            <summary>
+            Cancel Order
+            </summary>
+            <param name="OrderId">Order ID</param>
+            <param name="OrderType">Order Type</param>
+            <returns>Execution Context</returns>
+            <remarks>
+            Canceling an entry order is only possible for orders which defined the execution mode
+            as good till cancelled (GTC)
+            </remarks>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.ExitOrders">
+            <summary>
+            Get Exit Orders
+            </summary>
+            <returns>Collection of exit orders</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.CreateExitOrder(System.Int32,eToro.Trading.Trade.ExecutionMode)">
+            <summary>
+            Create Exit Order
+            </summary>
+            <param name="PositionId">Position To close</param>
+            <param name="Validity">Immediate Or Cancel/Good Till Cancelled</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.CancelExitOrder(System.Int32)">
+            <summary>
+            Cancel Exit Order
+            </summary>
+            <param name="OrderId">Order to Cancel</param>
+            <returns>Execution Context</returns>
+            <remarks>
+            Canceling an exit order is only possible for orders which defined the validity
+            as good till cancelled (GTC)
+            </remarks>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.EditPosition(eToro.Trading.Trade.PositionType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean})">
+            <summary>
+            Edit Live Position
+            </summary>
+            <param name="Position">Position to change</param>
+            <param name="StopLoss">Optional new Stop Loss Rate</param>
+            <param name="TakeProfit">Optional new Take Profit Rate</param>
+            <param name="TrailingStopLoss">Optional new Trailing Stop Loss</param>
+            <returns>Execution Context</returns>
+            <remarks>
+            Upon successful completion of the requested changes, there might be multiple execution reports sent.
+            Each execution report will verify that a non NULL valued parameter has been changed
+            </remarks>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.Positions">
+            <summary>
+            Get Open Positions
+            </summary>
+            <returns>Positions</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.PositionHistory(System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            Get Closed Positions
+            </summary>
+            <param name="MinDate">Minimum date for history</param>
+            <param name="Page">Current Page</param>
+            <param name="PageSize">Page Size</param>
+            <returns>Closed Positions</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.Credit">
+            <summary>
+            Get The current account credit
+            </summary>
+            <returns>Credit in base currency</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.Equity">
+            <summary>
+            Get the account equity details
+            </summary>
+            <returns>Equity Details</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.ITradeProvider.GetHistoricEquity(eToro.Trading.Trade.Objects.Equity.HistoricEquityPeriod,System.DateTime,System.DateTime)">
+            <summary>
+            Get Historic equity
+            </summary>
+            <param name="Interval">Requested Interval</param>
+            <param name="MinDate">Minimum Date</param>
+            <param name="MaxDate">Maximum Date</param>
+            <returns>Time seried equity items</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.TradeNotifications.OnNotificationHandler">
+            <summary>
+            Delegate on executiuon
+            </summary>
+            <param name="Msg">Execution Report</param>
+        </member>
+        <member name="E:eToro.Trading.Trade.TradeNotifications.OnNotification">
+            <summary>
+            Event on execution report
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradeNotifications.RealPrefix">
+            <summary>
+            Prefix for real trading topic
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradeNotifications.DemoPrefix">
+            <summary>
+            Prefix for demo trading topic
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradeNotifications.TopicFmt">
+            <summary>
+            Topic formatter
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradeNotifications.Keywords">
+            <summary>
+            Content 
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradeNotifications.Start(eToro.Trading.TradeFactory.AccountType,eToro.Trading.Trade.LoginContext,eToro.Trading.ILogger)">
+            <summary>
+            Start Processing
+            </summary>
+            <param name="AccountType">Account Type</param>
+            <param name="Context">Context</param>
+            <param name="Logger">Logger</param>
+        </member>
+        <member name="T:eToro.Trading.Trade.TradesProvider">
+            <summary>
+            Trades Provider
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider.BaseUrl">
+            <summary>
+            Base Trading URL
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider.ExitOrderVerb">
+            <summary>
+            Exit Order
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider.EntryOrderVerb">
+            <summary>
+            Entry Order
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider.MetadataVerb">
+            <summary>
+            Metadata
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider.TradeVerb">
+            <summary>
+            Trade
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider.CreditVerb">
+            <summary>
+            Credit Verb
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider.FeeVerb">
+            <summary>
+            Fees
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider._AccountType">
+            <summary>
+            Account Type
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider._Context">
+            <summary>
+            Login Context
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider._Notifications">
+            <summary>
+            Notifications Client
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider._Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradesProvider._APIClient">
+            <summary>
+            API Client
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.TradesProvider.APIExecutionResponse">
+            <summary>
+            Execution Response
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Trade.TradesProvider.OnEntryOrderExecutionReport">
+            <summary>
+            Event on entry order execution report
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Trade.TradesProvider.OnExitOrderExecutionReport">
+            <summary>
+            Event on exit order execution report
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Trade.TradesProvider.OnCloseTradeExecutionReport">
+            <summary>
+            Event on close trade
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Trade.TradesProvider.OnEditTradeExecutionReport">
+            <summary>
+            Event on edit trade
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.#ctor(eToro.Trading.TradeFactory.AccountType,eToro.Trading.Trade.LoginContext,eToro.Trading.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Account">Account Type</param>
+            <param name="Context">Login Context</param>
+            <param name="Logger">Logging</param>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.GetMetadata(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Get trading metadata on instruments
+            </summary>
+            <remarks>
+            The trading metadata contains information which defines the trading properties allowed on an instrument.
+            These properties include the available leverages, if we are allowed to take a long or short position, etc.
+            </remarks>
+            <param name="InstrumentIds">Requested instrument ids. If omitted will return all the available instruments</param>
+            <returns>Map of instrument id and its metadata</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.GetFees(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Get Fees on instruments
+            </summary>
+            <param name="InstrumentIds">Instrument ids, if omiteted, will return all the available instruments</param>
+            <returns>Map of instrument ID and fees</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.CreateEntryOrder(eToro.Trading.Trade.EntryOrderMarketGTC)">
+            <summary>
+            Create Order
+            </summary>
+            <param name="Order">Market Order GTC</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.CreateEntryOrder(eToro.Trading.Trade.EntryOrderMarketIOC)">
+            <summary>
+            Create Order
+            </summary>
+            <param name="Order">Market Order Immediate Or Cancel</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.CreateEntryOrder(eToro.Trading.Trade.LimitOrder)">
+            <summary>
+            Create Order
+            </summary>
+            <param name="Order">Limit Order</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.CancelEntryOrder(System.Int32,eToro.Trading.Trade.OrderTypes)">
+            <summary>
+            Cancel Order
+            </summary>
+            <param name="OrderId">Order ID</param>
+            <param name="OrderType">Order Type</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.ExitOrders">
+            <summary>
+            Get Exit Orders
+            </summary>
+            <returns>Collection of exit orders</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.CreateExitOrder(System.Int32,eToro.Trading.Trade.ExecutionMode)">
+            <summary>
+            Create Exit Order
+            </summary>
+            <param name="PositionId">Position To close</param>
+            <param name="Validity">Immediate Or Cancel/Good Till Cancelled</param>
+            <returns></returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.CancelExitOrder(System.Int32)">
+            <summary>
+            Cancel Exit Order
+            </summary>
+            <param name="OrderId">Order to Cancel</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.EditPosition(eToro.Trading.Trade.PositionType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean})">
+            <summary>
+            Edit Live Position
+            </summary>
+            <param name="Position">Position to change</param>
+            <param name="StopLoss">New Stop Loss Rate</param>
+            <param name="TakeProfit">New Take Profit Rate</param>
+            <param name="TrailingStopLoss">New Trailing Stop Loss</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.EntryOrders">
+            <summary>
+            Get Pending Orders
+            </summary>
+            <returns>Orders</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.Positions">
+            <summary>
+            Get Open Positions
+            </summary>
+            <returns>Positions</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.PositionHistory(System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            Get Closed Positions
+            </summary>
+            <param name="MinDate">Minimum date for history</param>
+            <param name="Page">Current Page</param>
+            <param name="PageSize">Page Size</param>
+            <returns>Closed Positions</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.Credit">
+            <summary>
+            Get The current account credit
+            </summary>
+            <returns>Credit in base currency</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.Equity">
+            <summary>
+            Get the account equity details
+            </summary>
+            <returns>Equity Details</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.GetHistoricEquity(eToro.Trading.Trade.Objects.Equity.HistoricEquityPeriod,System.DateTime,System.DateTime)">
+            <summary>
+            Get Historic equity
+            </summary>
+            <param name="Interval">Requested Interval</param>
+            <param name="MinDate">Minimum Date</param>
+            <param name="MaxDate">Maximum Date</param>
+            <returns>Time seried equity items</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.EntryOrder(eToro.Trading.Trade.APIEntryOrderType)">
+            <summary>
+            Create entry order
+            </summary>
+            <param name="Payload">Payload</param>
+            <returns>Execution Context</returns>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradesProvider.ConstructUrl(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Construct URL
+            </summary>
+            <param name="Verb">Verb</param>
+            <param name="Id">Object ID (Optional)</param>
+            <returns>URL</returns>
+        </member>
+        <member name="T:eToro.Trading.Trade.TradingListener">
+            <summary>
+            Trade Listener
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.TradingListener.OnNotificationHandler">
+            <summary>
+            Delegate on new event
+            </summary>
+            <param name="Msg">Execution Report</param>
+        </member>
+        <member name="E:eToro.Trading.Trade.TradingListener.OnNotification">
+            <summary>
+            Event on new Event
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Trade.TradingListener.IncomingMessage">
+            <summary>
+            Core incoming message
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradingListener.IncomingMessage.Identifier">
+            <summary>
+            Identifier (from the original request)
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradingListener.IncomingMessage.MessageType">
+            <summary>
+            Message Type
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Trade.TradingListener.IncomingMessage.Raw">
+            <summary>
+            Raw stringified response
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Trade.TradingListener._Logger">
+            <summary>
+            Logging
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Trade.TradingListener.#ctor(eToro.Trading.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Logger">Logging</param>
+        </member>
+        <member name="F:eToro.Trading.Utils.APIClient._Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Utils.APIClient.#ctor(eToro.Trading.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Logger">Logger</param>
+        </member>
+        <member name="M:eToro.Trading.Utils.APIClient.Get``1(System.String,System.Object,eToro.Trading.Trade.LoginContext,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Execute GET on trading API
+            </summary>
+            <typeparam name="T">Return Type</typeparam>
+            <param name="Uri">Resource URI</param>
+            <param name="Payload">Request Payload</param>
+            <param name="Context">Login Context</param>
+            <param name="Headers">Headers to add</param>
+            <returns>Typed response</returns>
+        </member>
+        <member name="M:eToro.Trading.Utils.APIClient.Put``1(System.String,System.Object,eToro.Trading.Trade.LoginContext,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Execute PUT on trading API
+            </summary>
+            <typeparam name="T">Return Type</typeparam>
+            <param name="Uri">Resource URI</param>
+            <param name="Payload">Request Payload</param>
+            <param name="Context">Login Context</param>
+            <param name="Headers">Headers to add</param>
+            <returns>Typed response</returns>
+        </member>
+        <member name="M:eToro.Trading.Utils.APIClient.Post``1(System.String,System.Object,eToro.Trading.Trade.LoginContext,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Execute Post on trading API
+            </summary>
+            <typeparam name="T">Return Type</typeparam>
+            <param name="Uri">Resource URI</param>
+            <param name="Payload">Request Payload</param>
+            <param name="Context">Login Context</param>
+            <param name="Headers">Headers to add</param>
+            <returns>Typed response</returns>
+        </member>
+        <member name="M:eToro.Trading.Utils.APIClient.Delete``1(System.String,System.Object,eToro.Trading.Trade.LoginContext,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Execute DELETE on trading API
+            </summary>
+            <typeparam name="T">Return Type</typeparam>
+            <param name="Uri">Resource URI</param>
+            <param name="Payload">Request Payload</param>
+            <param name="Context">Login Context</param>
+            <param name="Headers">Headers to add</param>
+            <returns>Typed response</returns>
+        </member>
+        <member name="M:eToro.Trading.Utils.APIClient.Execute``1(System.String,System.Net.Http.HttpMethod,System.Object,eToro.Trading.Trade.LoginContext,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Execute Trading API
+            </summary>
+            <typeparam name="T">Return Type</typeparam>
+            <param name="Uri">Resource URI</param>
+            <param name="Method">Method to execute</param>
+            <param name="Payload">Request Payload</param>
+            <param name="Context">Login Context</param>
+            <param name="Headers">Headers to add</param>
+            <returns>Typed response</returns>
+        </member>
+        <member name="M:eToro.Trading.Utils.NullLogger.Debug(System.String)">
+            <summary>
+            Debug Message
+            </summary>
+            <param name="Msg">Message</param>
+        </member>
+        <member name="M:eToro.Trading.Utils.NullLogger.Error(System.Exception,System.String)">
+            <summary>
+            Error Message
+            </summary>
+            <param name="Ex">Exception</param>
+            <param name="Msg">Message</param>
+        </member>
+        <member name="M:eToro.Trading.Utils.NullLogger.Error(System.String)">
+            <summary>
+            Error Message
+            </summary>
+            <param name="Msg">Message</param>
+        </member>
+        <member name="T:eToro.Trading.Infrastructure.Push.PushProvider">
+            <summary>
+            Push Provider
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType">
+            <summary>
+            Connection State
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType.IsOpen">
+            <summary>
+            Open ?
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType.Client">
+            <summary>
+            Lightstreamer Client
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType.StateMgr">
+            <summary>
+            Connection State
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType.Subscriptions">
+            <summary>
+            Subscriptions
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType.SubscriptionDetails">
+            <summary>
+            Subscription Details
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateType.Listener">
+            <summary>
+            Listener
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Infrastructure.Push.PushProvider.ConnectionStateMgr">
+            <summary>
+            Connection State manager
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Infrastructure.Push.PushProvider._ConnectionState">
+            <summary>
+            Connection To State
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Infrastructure.Push.PushProvider.Instance">
+            <summary>
+            Singleton Instance
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Infrastructure.Push.PushProvider.#ctor">
+            <summary>
+            Private Constructor
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Infrastructure.Push.PushProvider.Subscribe(eToro.Trading.Infrastructure.Push.PushConnectionType,Lightstreamer.DotNet.Client.ExtendedTableInfo,Lightstreamer.DotNet.Client.IHandyTableListener,eToro.Trading.Trade.LoginContext)">
+            <summary>
+            Subscribe
+            </summary>
+            <param name="ConnectionType">Type of Connection</param>
+            <param name="Table">Subscription Details</param>
+            <param name="Listener">Event Listener</param>
+            <param name="Context">Login Context</param>
+        </member>
+        <member name="M:eToro.Trading.Infrastructure.Push.PushProvider.GetConnectionInfo(eToro.Trading.Infrastructure.Push.PushConnectionType,eToro.Trading.Trade.LoginContext)">
+            <summary>
+            Get Connection Details
+            </summary>
+            <param name="ConnectionType">Connection Type</param>
+            <param name="Context">Login Context</param>
+            <returns>Connection Info</returns>
+        </member>
+        <member name="T:eToro.Trading.Infrastructure.Push.PushConnectionType">
+            <summary>
+            Connection Types
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Infrastructure.Push.PushConnectionType.Rates">
+            <summary>
+            Rates
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Infrastructure.Push.PushConnectionType.Real">
+            <summary>
+            Real
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Infrastructure.Push.PushConnectionType.Demo">
+            <summary>
+            Demo
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Infrastructure.Push.PushConnectionTypeExtenstions">
+            <summary>
+            Connection Type extension methods
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Infrastructure.Push.PushConnectionTypeExtenstions.EndpointUris">
+            <summary>
+            Endpoints
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Infrastructure.Push.PushConnectionTypeExtenstions.Endpoint(eToro.Trading.Infrastructure.Push.PushConnectionType)">
+            <summary>
+            Connection Type Endpoint 
+            </summary>
+            <param name="Conn">Connection Type</param>
+            <returns>Endpoint URI</returns>
+        </member>
+        <member name="T:eToro.Trading.Rates.OnRateHandler">
+            <summary>
+            Delegate on new Rate
+            </summary>
+            <param name="Rate">Rate</param>
+        </member>
+        <member name="T:eToro.Trading.Rates.IRateProvider">
+            <summary>
+            Rate Provider
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Rates.IRateProvider.OnRate">
+            <summary>
+            Event on new Rate
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Rates.IRateProvider.Get(System.Int32)">
+            <summary>
+            Get Rate for instrument
+            </summary>
+            <param name="InstrumentId">Instrument ID</param>
+            <returns>Rate, or null if no data</returns>
+        </member>
+        <member name="M:eToro.Trading.Rates.IRateProvider.GetMultiple(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Get Multiple Rates
+            </summary>
+            <param name="InstrumentIds">Instrument ID</param>
+            <returns>Map of instrument id and rate</returns>
+        </member>
+        <member name="M:eToro.Trading.Rates.IRateProvider.Subscribe(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Subscribe to instruments
+            </summary>
+            <remarks>
+            Subsequent subscription calls may be made and the instrument IDs will be the union of 
+            the currently subscribed instrument IDs with the new instrument IDs
+            </remarks>
+            <param name="InstrumentIds">Instrument IDs</param>
+        </member>
+        <member name="M:eToro.Trading.Rates.IRateProvider.Unsubscribe(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Unsubscribe to instruments
+            </summary>
+            <remarks>
+            In case you attempt to unsubscribe from instruments which you are not
+            currently subscribed to - no error will be produced
+            </remarks>
+            <param name="InstrumentIds">Instrument IDs</param>
+        </member>
+        <member name="T:eToro.Trading.Rates.RateProvider">
+            <summary>
+            Rates Provider
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Rates.RateProvider._Listener">
+            <summary>
+            Listener
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Rates.RateProvider.Rates">
+            <summary>
+            Map of Instrument ID and Rate
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Rates.RateProvider.RatesLocker">
+            <summary>
+            Handle concurrency on the rates map
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.Rates.RateProvider.InstrumentFields">
+            <summary>
+            Fields in the message
+            </summary>
+        </member>
+        <member name="E:eToro.Trading.Rates.RateProvider.OnRate">
+            <summary>
+            Event on new Rate
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Rates.RateProvider.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Rates.RateProvider.Get(System.Int32)">
+            <summary>
+            Get Rate for instrument
+            </summary>
+            <param name="InstrumentId">Instrument ID</param>
+            <returns>Rate, or null if no data</returns>
+        </member>
+        <member name="M:eToro.Trading.Rates.RateProvider.GetMultiple(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Get Multiple Rates
+            </summary>
+            <param name="InstrumentIds">Instrument ID</param>
+            <returns>Map of instrument id and rate</returns>
+        </member>
+        <member name="M:eToro.Trading.Rates.RateProvider.Subscribe(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Subscribe to instruments
+            </summary>
+            <param name="InstrumentIds">Instrument IDs</param>
+        </member>
+        <member name="M:eToro.Trading.Rates.RateProvider.Unsubscribe(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Unsubscribe to instruments
+            </summary>
+            <remarks>
+            In case you attempt to unsubscribe from instruments which you are not
+            currently subscribed to - no error will be produced
+            </remarks>
+            <param name="InstrumentIds">Instrument IDs</param>
+        </member>
+        <member name="T:eToro.Trading.Rates.RatesListener">
+            <summary>
+            Incoming Rates Listener
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Rates.RatesListener.OnRateHandler">
+            <summary>
+            Delegate on a new rate
+            </summary>
+            <param name="Rate">Rate</param>
+        </member>
+        <member name="E:eToro.Trading.Rates.RatesListener.OnRate">
+            <summary>
+            Event on a new Rate
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Rates.RatesListener.OnUpdate(System.Int32,System.String,Lightstreamer.DotNet.Client.IUpdateInfo)">
+            <summary>
+            On Update Callback
+            </summary>
+            <param name="ItemPos">Position in the table</param>
+            <param name="ItemName">Name of the subscribed topic</param>
+            <param name="UpdateInfo">Update information</param>
+        </member>
+        <member name="M:eToro.Trading.Rates.RatesListener.OnSnapshotEnd(System.Int32,System.String)">
+            <summary>
+            Snapshot  End
+            </summary>
+            <param name="ItemPos">Position in the table</param>
+            <param name="ItemName">Name of the subscribed topic</param>
+        </member>
+        <member name="M:eToro.Trading.Rates.RatesListener.OnRawUpdatesLost(System.Int32,System.String,System.Int32)">
+            <summary>
+            Updates Lost
+            </summary>
+            <param name="ItemPos">Position in the table</param>
+            <param name="ItemName">Name of the subscribed topic</param>
+            <param name="LostUpdates">Number of updates missing</param>
+        </member>
+        <member name="M:eToro.Trading.Rates.RatesListener.OnUnsubscr(System.Int32,System.String)">
+            <summary>
+            Unsubscription event
+            </summary>
+            <param name="ItemPos">Position in the table</param>
+            <param name="ItemName">Name of the subscribed topic</param>
+        </member>
+        <member name="M:eToro.Trading.Rates.RatesListener.OnUnsubscrAll">
+            <summary>
+            Unsubscription event
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.Rates.RateType">
+            <summary>
+            Rate
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Rates.RateType.InstrumentId">
+            <summary>
+            Instrument ID
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Rates.RateType.Bid">
+            <summary>
+            Bid
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Rates.RateType.Ask">
+            <summary>
+            Ask
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Rates.RateType.CovnersionRateBid">
+            <summary>
+            Conversion rate to the account base currency according to bid
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Rates.RateType.CovnersionRateAsk">
+            <summary>
+            Conversion rate to the account base currency according to ask
+            </summary>
+        </member>
+        <member name="P:eToro.Trading.Rates.RateType.IsActive">
+            <summary>
+            Active
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.Rates.RateType.ToRate(System.String,Lightstreamer.DotNet.Client.IUpdateInfo)">
+            <summary>
+            Convert an incoming request to a rate
+            </summary>
+            <param name="ItemName">Name of the item</param>
+            <param name="UpdateInfo">Update Date</param>
+            <returns>Rate</returns>
+        </member>
+        <member name="T:eToro.Trading.RateFactory">
+            <summary>
+            Rate Factory
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.RateFactory._Provider">
+            <summary>
+            Instance
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.RateFactory.Create(eToro.Trading.Trade.LoginContext)">
+            <summary>
+            Get Instance of rate provider
+            </summary>
+            <param name="Context">Login Context</param>
+            <returns>Rate provider</returns>
+        </member>
+        <member name="T:eToro.Trading.TradeFactory">
+            <summary>
+            Trade Factory
+            </summary>
+        </member>
+        <member name="T:eToro.Trading.TradeFactory.AccountType">
+            <summary>
+            Account Type
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.TradeFactory.AccountType.Real">
+            <summary>
+            Real Money Trading
+            </summary>
+        </member>
+        <member name="F:eToro.Trading.TradeFactory.AccountType.Virtual">
+            <summary>
+            Virtual Money Trading
+            </summary>
+        </member>
+        <member name="M:eToro.Trading.TradeFactory.Create(eToro.Trading.Trade.LoginContext,eToro.Trading.TradeFactory.AccountType,eToro.Trading.ILogger)">
+            <summary>
+            Create Provider By Login Context
+            </summary>
+            <param name="LoginContext">Login Context.</param>
+            <param name="AccountType">Type of account</param>
+            <param name="Logger">Optional Logging</param>
+            <returns>Trading Provider</returns>
+        </member>
+        <member name="T:eToro.Trading.ILogger">
+            <summary>
+            Logging Interface. 
+            </summary>
+            <remarks>
+            
+            </remarks>
+        </member>
+        <member name="M:eToro.Trading.ILogger.Debug(System.String)">
+            <summary>
+            Debug Message
+            </summary>
+            <param name="Msg">Message</param>
+        </member>
+        <member name="M:eToro.Trading.ILogger.Error(System.Exception,System.String)">
+            <summary>
+            Error Message
+            </summary>
+            <param name="Ex">Exception</param>
+            <param name="Msg">Message</param>
+        </member>
+        <member name="M:eToro.Trading.ILogger.Error(System.String)">
+            <summary>
+            Error Message
+            </summary>
+            <param name="Msg">Message</param>
+        </member>
+    </members>
+</doc>
