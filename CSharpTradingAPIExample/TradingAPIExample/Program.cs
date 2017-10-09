@@ -15,17 +15,17 @@ namespace TradingAPIExample
         /// <summary>
         /// Your API Key (from the API protal)
         /// </summary>
-        private const string APIKey = "b9f5fd2d351a4402a8da66196db00b70";
+        private const string APIKey = "";
 
         /// <summary>
         /// Your eToro username
         /// </summary>
-        private const string Username = "LeTraderNo1";
+        private const string Username = "";
 
         /// <summary>
         /// Your eToro passwprd
         /// </summary>
-        private const string Password = "danny123";
+        private const string Password = "";
 
         /// <summary>
         /// Instrument ID of Bitcoin
