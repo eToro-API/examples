@@ -55,12 +55,7 @@
     <div id="ResultTbl"></div>
 
     <script>
-        //
-        // As we'll be accessing two API products (Competitions and Professional) 
-        // we need to define two API keys, and define the competition ID
-        //
         var COMPETITION_API_KEY = YOUR_COMPETITIONS_API_KEY;
-        var PROFESSIONAL_API_KEY = YOUR_PROFESSIONAL_API_KEY;
         var COMPETITION_ID = YOUR_COMPETITION_ID;
 
         $(document).ready(function() {
@@ -239,7 +234,7 @@
             $.ajax({
                 url: 'https://api.etoro.com/API/User/V1/Multiple/Info?Usernames=' + usernames,
                 beforeSend: function(xhr) {
-                    xhr.setRequestHeader('Ocp-Apim-Subscription-Key', PROFESSIONAL_API_KEY);
+                    xhr.setRequestHeader('Ocp-Apim-Subscription-Key', COMPETITION_API_KEY);
                 },
                 type: 'GET',
                 success: function(data) {
